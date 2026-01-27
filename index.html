@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>أحمد & آلاء ❤️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #9e0101; 
+            --secondary: #ff0000; 
+            --gold: #d4af37;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --bg: #050505; 
+            --glow-shadow: 0 0 25px rgba(158, 1, 1, 0.4);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { margin: 0; background: var(--bg); color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
+
+        .hearts-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: hidden; }
+        .heart-particle { position: absolute; color: var(--secondary); opacity: 0.5; animation: fall linear infinite; filter: drop-shadow(0 0 5px var(--primary)); }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        #page-1 {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            background: radial-gradient(circle at center, #300000 0%, #050505 100%);
+            position: fixed; width: 100%; z-index: 9999; transition: 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .pro-title {
+            font-size: 42px; font-weight: 900; margin-bottom: 5px;
+            background: linear-gradient(to bottom, #fff 30%, var(--secondary) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(255,0,0,0.5));
+        }
+
+        .login-card {
+            background: rgba(15, 15, 15, 0.7); backdrop-filter: blur(25px); padding: 50px 30px;
+            border-radius: 40px; border: 1px solid var(--glass-border); text-align: center;
+            width: 90%; max-width: 400px; box-shadow: 0 15px 50px rgba(0,0,0,0.8), var(--glow-shadow);
+            position: relative; z-index: 10000;
+        }
+
+        #page-2 { display: none; opacity: 0; height: 100vh; overflow-y: auto; position: relative; z-index: 5; transition: 1s; background: linear-gradient(180deg, #050505 0%, #1a0000 100%); }
+        .container { padding: 30px 20px; max-width: 500px; margin: 0 auto; position: relative; z-index: 10; }
+
+        .main-title { font-weight: 900; background: linear-gradient(45deg, #fff, var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        .glass-card {
+            background: var(--glass); border: 1px solid var(--glass-border); border-radius: 35px; 
+            margin-bottom: 25px; overflow: hidden; opacity: 0; transform: translateY(40px); 
+            transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+        .glass-card.show { opacity: 1; transform: translateY(0); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .glass-card img, .glass-card video { width: 100%; display: block; filter: contrast(1.1); transition: 0.5s; }
+
+        .counter-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 30px 0; }
+        .count-box { 
+            background: linear-gradient(145deg, rgba(158, 1, 1, 0.2), rgba(0,0,0,0.5)); 
+            border: 1px solid var(--glass-border); padding: 20px 5px; border-radius: 20px; text-align: center;
+        }
+        .count-num { font-size: 24px; font-weight: 800; display: block; color: #fff; text-shadow: 0 0 10px var(--secondary); }
+
+        .modern-player {
+            position: sticky; top: 20px; z-index: 1000;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px; padding: 12px 20px;
+            display: flex; align-items: center; gap: 15px;
+            margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .music-disc {
+            width: 45px; height: 45px; border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex; align-items: center; justify-content: center;
+            animation: rotate 3s linear infinite; animation-play-state: paused;
+        }
+        .music-disc.playing { animation-play-state: running; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .btn-style { background: linear-gradient(45deg, var(--primary), #000); color: white; border: 1px solid var(--secondary); padding: 15px 25px; border-radius: 50px; font-weight: 700; cursor: pointer; width: 100%; transition: 0.3s; margin-top: 10px; }
+        
+        .msg-box { display: none; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 20px; margin-top: 10px; border-right: 4px solid var(--secondary); font-size: 14px; animation: fadeIn 0.5s; }
+
+        #page-3 { display: none; opacity: 0; position: fixed; inset: 0; z-index: 10000; background: #000; transition: 1.5s; overflow-y: auto; }
+        .secret-content { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; background: radial-gradient(circle at center, #4b0000 0%, #000 100%); }
+        .floating-message { background: rgba(0,0,0,0.8); border: 1px solid var(--secondary); padding: 30px 20px; border-radius: 30px; max-width: 450px; animation: float 3s ease-in-out infinite; border-left: 5px solid var(--secondary); }
+
+        #final-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); z-index: 20000; align-items: center; justify-content: center; opacity: 0; transition: opacity 1.5s ease; }
+        .cinema-text { font-size: 22px; text-align: center; color: #fff; padding: 30px; line-height: 1.6; max-width: 85%; }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <div class="hearts-bg" id="hearts-container"></div>
+
+    <section id="page-1">
+        <div class="login-card animate__animated animate__zoomIn">
+            <h1 class="pro-title">أحمد & آلاء</h1>
+            <p style="opacity:0.6; font-size:12px; margin-bottom:30px; letter-spacing: 2px;">VINTAGE LOVE STORY ✨</p>
+            <input type="text" id="passInput" placeholder="اكتب الباسورد السري.." style="width:100%; background:rgba(255,255,255,0.07); border:1px solid var(--glass-border); padding:18px; border-radius:20px; color:#fff; text-align:center; margin-bottom:25px; outline:none;">
+            <button class="btn-style" onclick="goToPage2()">اضغط هنا ي روحي ❤🥹</button>
+        </div>
+    </section>
+
+    <section id="page-2">
+        <div class="container">
+            <header style="text-align:center; padding:10px 0;">
+                <h2 class="main-title">حكايتنا بدأت هنا ❤️</h2>
+            </header>
+
+            <div class="modern-player">
+                <div class="music-disc" id="disc">
+                    <i class="fa-solid fa-music" style="color:#fff;"></i>
+                </div>
+                <div style="flex:1">
+                    <div style="font-size:14px; font-weight:700;">صوت حكايتنا ❤️</div>
+                    <div style="font-size:10px; color:var(--gold);">قيد التشغيل الآن...</div>
+                </div>
+                <div onclick="toggleMusic()" style="cursor:pointer; font-size: 20px;">
+                    <i id="pIcon" class="fa-solid fa-pause"></i>
+                </div>
+            </div>
+
+            <audio id="loveSong" loop>
+                <source src="https://l.top4top.io/m_3679utiro1.mp4" type="audio/mpeg">
+            </audio>
+
+            <div class="counter-grid">
+                <div class="count-box"><span id="years" class="count-num">0</span><span style="font-size:11px; opacity:0.6;">سنة</span></div>
+                <div class="count-box"><span id="months" class="count-num">0</span><span style="font-size:11px; opacity:0.6;">شهر</span></div>
+                <div class="count-box"><span id="days" class="count-num">27</span><span style="font-size:11px; opacity:0.6;">يوم</span></div>
+                <div class="count-box"><span id="hours" class="count-num">0</span><span style="font-size:11px; opacity:0.6;">ساعة</span></div>
+                <div class="count-box"><span id="mins" class="count-num">0</span><span style="font-size:11px; opacity:0.6;">دقيقة</span></div>
+                <div class="count-box"><span id="secs" class="count-num">0</span><span style="font-size:11px; opacity:0.6;">ثانية</span></div>
+            </div>
+
+            <div class="gallery">
+                <div class="glass-card"><img src="https://files.catbox.moe/b4p5ud.jpg"></div>
+
+                <div class="glass-card" style="padding:15px; background: rgba(158,1,1,0.1);">
+                    <button class="btn-style" onclick="showMsg('msg1')">اضغط هنا يا روحي 🥹</button>
+                    <div id="msg1" class="msg-box">من اول لحظه شوفتك فيها حسيت ان حياتي اتلونت بالفرحه والضحك والراحه🥹</div>
+                </div>
+
+                <div class="glass-card">
+                    <video id="loveVideo" controls onplay="pauseMainMusic()" onpause="playMainMusic()">
+                        <source src="https://files.catbox.moe/k5k3la.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="glass-card" style="padding:15px;"><button class="btn-style" onclick="showMsg('msg2')">اضغط هنا يا روحي ❤🥹</button><div id="msg2" class="msg-box">انت حكايتي المفضلة وأجمل لحن في قلبي انت هتفضل احلي قرار أنا اخدته ♥️</div></div>
+                <div class="glass-card" style="padding:15px;"><button class="btn-style" onclick="showMsg('msg3')">اضغط هنا يا غالي 😍</button><div id="msg3" class="msg-box">انت ملجأى الوحيد وأماني❤🫂</div></div>
+                <div class="glass-card" style="padding:15px;"><button class="btn-style" onclick="showMsg('msg4')">اضغط هنا يا نور عيني🥹</button><div id="msg4" class="msg-box">أنا اسفه يا حبيبي وحقك عليا أنا مقدرش علي زعلك 🥹♥️</div></div>
+                
+                <div class="glass-card" style="padding:15px;">
+                    <button class="btn-style" onclick="showMsg('msg5')">اضغط هنا يا نن عيني ❤</button>
+                    <div id="msg5" class="msg-box">بموت فيك يا قلبي 🥹❤</div>
+                </div>
+            </div>
+
+            <div style="text-align:center; padding-bottom:100px;">
+                <button class="btn-style" onclick="goToPage3()" style="background: var(--gold); color: #000;">أنا بحبك متزعلش مني ♥️</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="page-3">
+        <div class="secret-content">
+            <div class="floating-message">
+                <i class="fa-solid fa-heart-pulse" style="color:var(--secondary); font-size:45px; margin-bottom:20px;"></i>
+                <h2 style="color:var(--secondary);">رسالة اعتراف ❤️</h2>
+                <p style="font-size:14px; line-height:1.7; color:#eee; text-align: justify;">
+                    أنا عارفه اني بزعلك كتير بس والله مليش غيرك في الدنيا دي انت اهلي وصحابي ودنيتي كلها وسندي وعيني اللي بشوف بيها كمان أنّت ملجأي الوحيد من قسوة الدنيا دي كلها أنا والله مقدرش استغني عنك أبدا والله بحبك اوي والله عارفه انك استحملتني كتير ♥️ لو اعرف اخد الوجع كله من قلبك واعيشه لوحدي كنت عملت كده لو اقدر اخد من عمري وأديلك وتعيش فوق العمر عمر كنت عملتها لو ينفع اديك عيوني تشوف نفسك انت بالنسبالي اي هتعرف انك كل حياتي♥️ انت الوحيد اللي عرفت تغيرني للأحسن بقيت ابويا واخويا وأهلي كلهم خليتني مش محتاجه لصحاب في حياتي عشان انت صاحبي قبل حبيبي 🥹♥️ عارفه اني غلطت في حقك وضايقتك بس والله حقك عليا مقدرش علي زعلك والله عارفه ان بقينا نتخانق كتير بس نعدي كل دا مع بعض اي حاجه إلا انك تبعد هفضل احاول لاخر نفس فيا اللي عيشته معاك مينفعش مع غيرك ♥️ بحبك والله وحقك عليا يا نور عيني 🌎♥️
+                </p>
+                <button class="btn-style" onclick="showFinalMessage()">آخر كلمة.. ❤️</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="final-overlay" onclick="this.style.opacity='0'; setTimeout(()=>{this.style.display='none'}, 1500)">
+        <div class="cinema-text" id="typewriter"></div>
+    </div>
+
+    <script>
+        const audio = document.getElementById('loveSong');
+        const video = document.getElementById('loveVideo');
+        const pIcon = document.getElementById('pIcon');
+        const disc = document.getElementById('disc');
+
+        let isMusicPausedManually = false;
+
+        function toggleMusic() {
+            if(audio.paused) { 
+                playMainMusic();
+                isMusicPausedManually = false;
+            } else { 
+                pauseMainMusic();
+                isMusicPausedManually = true;
+            }
+        }
+
+        function playMainMusic() {
+            if (!video.paused) return; 
+            audio.play().catch(e => console.log("Autoplay blocked, waiting for interaction"));
+            pIcon.className = 'fa-solid fa-pause';
+            disc.classList.add('playing');
+        }
+
+        function pauseMainMusic() {
+            audio.pause();
+            pIcon.className = 'fa-solid fa-play';
+            disc.classList.remove('playing');
+        }
+
+        video.onplay = () => { pauseMainMusic(); };
+        video.onpause = () => { if(!isMusicPausedManually) playMainMusic(); };
+
+        function showMsg(id) {
+            const el = document.getElementById(id);
+            el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function goToPage2() {
+            const pass = document.getElementById('passInput').value;
+            if(pass === "6/6") {
+                document.getElementById('page-1').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('page-1').style.display = 'none';
+                    document.getElementById('page-2').style.display = 'block';
+                    document.body.style.overflow = 'auto';
+                    setTimeout(() => { 
+                        document.getElementById('page-2').style.opacity = '1'; 
+                        checkScroll(); 
+                    }, 50);
+                    startCounter();
+                    createHearts();
+                    playMainMusic(); 
+                }, 800);
+            } else { alert("الباسورد غلط.. ركز ❤️"); }
+        }
+
+        function startCounter() {
+            const nowTime = new Date();
+            const start = new Date(nowTime);
+            start.setMonth(start.getMonth() - 8);
+            start.setDate(start.getDate() - 27);
+
+            function update() {
+                const current = new Date();
+                let diff = current - start;
+                let secs = Math.floor(diff / 1000);
+                let mins = Math.floor(secs / 60);
+                let hours = Math.floor(mins / 60);
+                let daysTotal = Math.floor(hours / 24);
+                let years = Math.floor(daysTotal / 365);
+                let remainingDays = daysTotal % 365;
+                let months = Math.floor(remainingDays / 30.44);
+                let days = Math.floor(remainingDays % 30.44);
+
+                document.getElementById('years').innerText = years;
+                document.getElementById('months').innerText = months;
+                document.getElementById('days').innerText = days;
+                document.getElementById('hours').innerText = hours % 24;
+                document.getElementById('mins').innerText = mins % 60;
+                document.getElementById('secs').innerText = secs % 60;
+            }
+            setInterval(update, 1000);
+            update();
+        }
+
+        function showFinalMessage() {
+            const overlay = document.getElementById('final-overlay');
+            const textTarget = document.getElementById('typewriter');
+            const fullText = "ممكن تكون بالنسبة للعالم مجرد شخص ..لكن انت بالنسبة لي العالم كله";
+            overlay.style.display = 'flex';
+            setTimeout(() => { overlay.style.opacity = '1'; }, 100);
+            let i = 0; textTarget.innerHTML = "";
+            function type() { if (i < fullText.length) { textTarget.innerHTML += fullText.charAt(i); i++; setTimeout(type, 100); } }
+            setTimeout(type, 1000);
+        }
+
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            setInterval(() => {
+                const heart = document.createElement('i');
+                heart.className = 'fa-solid fa-heart heart-particle';
+                heart.style.left = Math.random() * 100 + 'vw';
+                container.appendChild(heart);
+                setTimeout(() => heart.remove(), 6000);
+            }, 400);
+        }
+
+        function checkScroll() {
+            document.querySelectorAll('.glass-card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if(rect.top < window.innerHeight - 50) card.classList.add('show');
+            });
+        }
+        document.getElementById('page-2').addEventListener('scroll', checkScroll);
+
+        function goToPage3() {
+            document.getElementById('page-3').style.display = 'block';
+            setTimeout(() => { document.getElementById('page-3').style.opacity = '1'; }, 50);
+        }
+    </script>
+</body>
+</html>
